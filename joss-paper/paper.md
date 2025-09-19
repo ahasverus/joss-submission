@@ -61,7 +61,7 @@ affiliations:
 # Summary
 
 `forcis` is an R package designed to streamline access to the recently published
-FORCIS (Foraminifera Response to Climatic Stress) database (Chaabane et al. 2023). This 
+FORCIS (Foraminifera Response to Climatic Stress) database (@chaabane2023). This 
 database provides one of the most comprehensive collections of global planktonic 
 foraminifera living census data, comprising over 163,000 samples collected via 
 various sampling devices between 1910 and 2018. This package enables users to 
@@ -77,13 +77,13 @@ foraminifera living census data, comprising over 163,000 samples collected via
 various sampling devices (Continuous Plankton Recorder — CPR —, plankton nets, 
 pumps, and sediment traps). These samples span a wide temporal range (1910 to 
 2018), vertical depths (surface to 5,000 m), and spatial coverage 
-(Chaabane et al., 2023; de Garidel-Thoron et al., 2022). FORCIS data are crucial 
+(@chaabane2023, @degaridel2022). FORCIS data are crucial 
 for advancing insights into potential spatial and vertical migrations and 
 understanding the impacts of global climate change on planktonic foraminifera 
 biogeography and their seasonal and vertical distribution patterns observed in 
 recent decades. Additionally, FORCIS’s long temporal scope offers a valuable 
 resource for investigating the influence of anthropogenic changes on planktonic 
-foraminifera distribution and ecology (Chaabane et al., 2024a).
+foraminifera distribution and ecology (@chaabane2024).
 
 However, working with the FORCIS database presents significant challenges due 
 to the heterogeneity of the data, which has been compiled from 140 sources, 
@@ -159,7 +159,7 @@ taxonomic framework they wish to apply (\autoref{fig:fig2}). The FORCIS database
 counts at three different taxonomic levels: Original Taxonomy (OT), Lumped 
 Taxonomy (LT), and Validated Taxonomy (VT). For a detailed explanation of the 
 differences between these three taxonomic levels, we refer the reader to the 
-FORCIS data descriptor (Chaabane et al., 2023). For selecting the taxonomic 
+FORCIS data descriptor ([@chaabane2023]). For selecting the taxonomic 
 framework of choice, the users can use the function `select_taxonomy()` 
 following the example below:
 
@@ -224,7 +224,7 @@ raw abundance (count of individuals) of a given taxon, and $N_{total}$ is the
 total raw abundance (sum of all individuals in the sample or subsample).
 
 The users can decide whether to convert counts at a sample or subsample level 
-(see Chaabane et al., 2023) as the `compute_*()` functions propose the 
+(see @chaabane2023) as the `compute_*()` functions propose the 
 `aggregate` argument. If `aggregate = TRUE`, the function will return the 
 transformed counts of each species using the sample as the unit. If 
 `aggregate = FALSE`, it will re-calculate the species' abundance by subsample. 
