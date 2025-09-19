@@ -1,5 +1,5 @@
 ---
-title: 'forcis: An R package for accessing, handling and analysing the FORCIS Foraminifera database'
+title: 'forcis: An R package for accessing, handling and analysing the FORCIS database'
 tags:
 - r
 - database
@@ -61,12 +61,10 @@ affiliations:
 # Summary
 
 `forcis` is an R package designed to streamline access to the recently published
-FORCIS (Foraminifera Response to Climatic Stress) database (@chaabane2023). This 
-database provides one of the most comprehensive collections of global planktonic 
-foraminifera living census data, comprising over 163,000 samples collected via 
-various sampling devices between 1910 and 2018. This package enables users to 
-easily download the database directly into an R environment, filter and select 
-relevant data, convert species counts across formats, and visualise the results.
+FORCIS (Foraminifera Response to Climatic Stress) database [@chaabane2023]. This 
+package enables users to easily download the database directly into an R 
+environment, filter and select relevant data, convert species counts across 
+formats, and visualise the results.
 
 
 # Statement of need
@@ -77,13 +75,13 @@ foraminifera living census data, comprising over 163,000 samples collected via
 various sampling devices (Continuous Plankton Recorder — CPR —, plankton nets, 
 pumps, and sediment traps). These samples span a wide temporal range (1910 to 
 2018), vertical depths (surface to 5,000 m), and spatial coverage 
-(@chaabane2023, @degaridel2022). FORCIS data are crucial 
+[@chaabane2023; @degaridel2022]. FORCIS data are crucial 
 for advancing insights into potential spatial and vertical migrations and 
 understanding the impacts of global climate change on planktonic foraminifera 
 biogeography and their seasonal and vertical distribution patterns observed in 
 recent decades. Additionally, FORCIS’s long temporal scope offers a valuable 
 resource for investigating the influence of anthropogenic changes on planktonic 
-foraminifera distribution and ecology (@chaabane2024).
+foraminifera distribution and ecology [@chaabane2024].
 
 However, working with the FORCIS database presents significant challenges due 
 to the heterogeneity of the data, which has been compiled from 140 sources, 
@@ -100,7 +98,8 @@ complexity, making data extraction and analysis challenging for users.
 To overcome these obstacles, we developed the `forcis` package, an easy-to-use 
 tool made especially for using the R programming environment to access, filter, 
 harmonise, and visualise the FORCIS data. The `forcis` package enables users to 
-download data directly from Zenodo the latest version of the FORCIS database, 
+download data directly from [Zenodo](https://doi.org/10.5281/zenodo.7390791) the 
+latest version of the FORCIS database, 
 filter and select data according to user-specified criteria, harmonise 
 taxonomic resolution, convert species counts into uniform units, and visualise 
 patterns in diversity and abundance. By combining these features, the package 
@@ -113,7 +112,7 @@ efficiently, streamlining their investigative efforts.
 
 To facilitate efficient management and analysis of the FORCIS database, the 
 `forcis` R package provides a comprehensive set of features fully described in 
-the package vignettes, where users can find extensive documentation and 
+the [package vignettes](https://docs.ropensci.org/forcis/articles/), where users can find extensive documentation and 
 tutorials on the major features of the package. The recommended workflow and 
 the relevant main functions are illustrated in \autoref{fig:fig2}.
 
@@ -159,7 +158,7 @@ taxonomic framework they wish to apply (\autoref{fig:fig2}). The FORCIS database
 counts at three different taxonomic levels: Original Taxonomy (OT), Lumped 
 Taxonomy (LT), and Validated Taxonomy (VT). For a detailed explanation of the 
 differences between these three taxonomic levels, we refer the reader to the 
-FORCIS data descriptor ([@chaabane2023]). For selecting the taxonomic 
+FORCIS data descriptor [@chaabane2023]. For selecting the taxonomic 
 framework of choice, the users can use the function `select_taxonomy()` 
 following the example below:
 
@@ -215,7 +214,7 @@ $$C_{number} = \frac{N_{raw}}{V_{filtered}}$$
 
 where $C_{number}$ is the number concentration, $N_{raw}$ is the raw abundance 
 (count of individuals), and $V_{filtered}$ is the volume of water filtered 
-(in m^3 or L, depending on the dataset).
+(in $m^3$ or L, depending on the dataset).
 
 $$Frequency = 100 \cdot \frac{N_{raw}}{N_{total}}$$
 
@@ -229,9 +228,6 @@ The users can decide whether to convert counts at a sample or subsample level
 transformed counts of each species using the sample as the unit. If 
 `aggregate = FALSE`, it will re-calculate the species' abundance by subsample. 
 
-The output of these functions is a table in a long format as well as a message 
-reporting the amount of data that could not be converted because of missing 
-metadata required to perform the transformation.
 
 
 ## Visualisation
@@ -299,5 +295,3 @@ peer review process in
 
 
 # References
-
-...
