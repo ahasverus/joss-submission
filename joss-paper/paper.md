@@ -61,19 +61,52 @@ affiliations:
 # Summary
 
 `forcis` is an R package designed to streamline access to the recently published
-FORCIS (Foraminifera Response to Climatic Stress) database (**REF**). This 
+FORCIS (Foraminifera Response to Climatic Stress) database (Chaabane et al. 2023). This 
 database provides one of the most comprehensive collections of global planktonic 
 foraminifera living census data, comprising over 163,000 samples collected via 
-various sampling devices between 1910 and 2018.
-
-This package enables users to download the database directly into an R 
-environment, filter and select relevant data, convert species counts across 
-formats, and visualise the results.
+various sampling devices between 1910 and 2018. This package enables users to 
+easily download the database directly into an R environment, filter and select 
+relevant data, convert species counts across formats, and visualise the results.
 
 
 # Statement of need
 
-...
+The recently developed FORCIS (Foraminifera Response to Climatic Stress) 
+database provides one of the most comprehensive collections of global planktonic 
+foraminifera living census data, comprising over 163,000 samples collected via 
+various sampling devices (Continuous Plankton Recorder — CPR —, plankton nets, 
+pumps, and sediment traps). These samples span a wide temporal range (1910 to 
+2018), vertical depths (surface to 5,000 m), and spatial coverage 
+(Chaabane et al., 2023; de Garidel-Thoron et al., 2022). FORCIS data are crucial 
+for advancing insights into potential spatial and vertical migrations and 
+understanding the impacts of global climate change on planktonic foraminifera 
+biogeography and their seasonal and vertical distribution patterns observed in 
+recent decades. Additionally, FORCIS’s long temporal scope offers a valuable 
+resource for investigating the influence of anthropogenic changes on planktonic 
+foraminifera distribution and ecology (Chaabane et al., 2024a).
+
+However, working with the FORCIS database presents significant challenges due 
+to the heterogeneity of the data, which has been compiled from 140 sources, 
+each using its own taxonomic framework and reporting formats (\autoref{fig:fig1}). This 
+results in variability in data units, such as concentrations, frequencies, and 
+raw counts, requiring extensive standardisation for meaningful comparison. 
+Furthermore, the metadata associated with each sample — such as location, 
+sampling depth, time, and environmental parameters — adds another layer of 
+complexity, making data extraction and analysis challenging for users.
+
+![Heterogeneity of data within the FORCIS database. a) Number of taxa from different taxonomic frameworks present in the FORCIS database (net data). b) Different count formats from net samples included in the FORCIS database.\label{fig:fig1}](figures/figure-1.png){ width=100% }
+
+
+To overcome these obstacles, we developed the `forcis` package, an easy-to-use 
+tool made especially for using the R programming environment to access, filter, 
+harmonise, and visualise the FORCIS data. The `forcis` package enables users to 
+download data directly from Zenodo the latest version of the FORCIS database, 
+filter and select data according to user-specified criteria, harmonise 
+taxonomic resolution, convert species counts into uniform units, and visualise 
+patterns in diversity and abundance. By combining these features, the package 
+enables researchers to access and analyse the data within the FORCIS database 
+efficiently, streamlining their investigative efforts. 
+
 
 
 # Main features
@@ -82,7 +115,9 @@ To facilitate efficient management and analysis of the FORCIS database, the
 `forcis` R package provides a comprehensive set of features fully described in 
 the package vignettes, where users can find extensive documentation and 
 tutorials on the major features of the package. The recommended workflow and 
-the relevant main functions are illustrated in Fig. 2.
+the relevant main functions are illustrated in \autoref{fig:fig2}.
+
+![Recommended workflow and main features of the `forcis` R package.\label{fig:fig2}](figures/figure-2.png){ width=100% }
 
 
 ## Download and import FORCIS database in R
@@ -120,7 +155,7 @@ the metadata they are interested in by using the function
 ## Harmonising taxonomy
 
 To utilise most features of the `forcis` R package, users need to specify the 
-taxonomic framework they wish to apply (Fig. 2). The FORCIS database includes 
+taxonomic framework they wish to apply (\autoref{fig:fig2}). The FORCIS database includes 
 counts at three different taxonomic levels: Original Taxonomy (OT), Lumped 
 Taxonomy (LT), and Validated Taxonomy (VT). For a detailed explanation of the 
 differences between these three taxonomic levels, we refer the reader to the 
@@ -143,7 +178,7 @@ analysing community structure at a specific time, or location, or even
 examining the counts of species of interest. Given the wide range of potential 
 research questions, we have implemented six filtering functions within the 
 `filter_by_*()` function family, allowing users to customise data extraction 
-according to their investigation needs (Fig. 2 and Table 1).
+according to their investigation needs (\autoref{fig:fig2}).
 
 
 ```r
@@ -204,12 +239,14 @@ metadata required to perform the transformation.
 The `forcis` package also includes multiple functions to visualise the spatial 
 distribution of samples selected by users. The `ggmap_data()` function 
 generates publication-ready maps, displaying sample locations at a global scale 
-(Fig. 3a). Additionally, users can visualise sample records by various time 
+(\autoref{fig:fig3}a). Additionally, users can visualise sample records by various time 
 units (season, month, year) and by depth, using the functions from the 
-`plot_record_by_*()` function family (Fig. 3b-d).
+`plot_record_by_*()` function family (\autoref{fig:fig3}b-d).
 These functions can be seamlessly combined with the `filter_by_*()` family of 
 functions, allowing users to customise their sample selections according to 
-their specific research needs (see Box 1).
+their specific research needs.
+
+![Overview of visualisations available in the `forcis` R package. a) World map produced by the function `ggmap_data()` to show the location of the data. b) Barplot of number of samples per month produced by the function `plot_records_by_month()`. c) Barplot of number of samples per depth class produced by the function `plot_records_by_depth()`. d) Barplot of number of samples per year produced by the function `plot_records_by_year()`.\label{fig:fig3}](figures/figure-3.png){ width=100% }
 
 ```r
 # Map raw net data ----
@@ -225,72 +262,27 @@ plot_record_by_month(net_data)
 plot_record_by_depth(net_data)
 ```
 
-# Case study
 
-To illustrate the capabilities of the `forcis` R package, we investigated the 
-distribution data of planktonic foraminifera species 
-_Neogloboquadrina pachyderma_ between 1970 and 2000 in the North Atlantic Ocean.
+`forcis` provides five vignettes to learn more about the package:
 
-```r
-# Prepare data ----
-net_data <- read_plankton_nets_data(path = "data/") |>
-  select_taxonomy(taxonomy = "VT") |>
-  select_forcis_columns() |>
-  filter_by_ocean(ocean = "North Atlantic Ocean") |>
-  filter_by_year(years = 1970:2000) |>
-  filter_by_species(species = "n_pachyderma_VT") |>
-  dplyr::filter(n_pachyderma_VT > 0)
-
-# Map N. pachyderma records ----
-ggmap_data(net_data)
-
-# Plot number of records by month ----
-plot_record_by_year(net_data)
-```
-
-
-# Opportunities and future directions
-
-The forcis R package has been designed to streamline access to the FORCIS 
-database by enabling users to seamlessly download data directly into an R 
-environment. It provides robust tools for filtering and selecting relevant data,
-converting species counts across multiple formats, and visualising the results, 
-making it an indispensable resource for researchers looking to efficiently 
-manage and analyse FORCIS data.  This package is open to external 
-collaborations, and we welcome contributions to enhance its features.
-
-One potential development for forcis could be the addition of analytical 
-features, such as normalising abundance data to a standardised mesh size of 
-over 100 µm (Chaabane, et al., 2024b). Furthermore, forcis could expand its 
-analytical tools to include dynamic visualisations, such as interactive maps 
-and time-series animations, allowing users to explore complex data more 
-intuitively.  In addition, forcis could facilitate the integration of new 
-planktonic foraminifera census data into the database by sourcing observations 
-from environmental and biodiversity platforms such as [OBIS](https://obis.org), 
-[GBIF](https://gbif.org), [PANGAEA](https://www.pangaea.de) and 
-[EcoTaxa](https://ecotaxa.obs-vlfr.fr). 
-
-To broaden its user base, the forcis R package is aiming to continuously update 
-the user-friendly guides and tutorials, as well as organise outreach initiatives
-to integrate the forcis R package into workshop sessions at FRB-CESAB. This 
-will help expand data collection efforts, ensuring that the forcis R package 
-remains a useful tool for the marine research community in the years to come.
-
-The tool we present underscores that simply releasing data is not enough to 
-ensure its reusability. To truly uphold FAIR principles, data products must be 
-accompanied by the tools and software needed to access, process, and interpret 
-them. We advocate for a broader commitment to developing and sharing such tools 
-as an integral part of open science.
-
+- the [Get started](https://docs.ropensci.org/forcis/articles/forcis.html) 
+vignette describes the core features of the package
+- the [Database versions](https://docs.ropensci.org/forcis/articles/database-versions.html)
+vignette provides information on how to deal with the versioning of the database
+- the [Select and filter data](https://docs.ropensci.org/forcis/articles/select-and-filter-data.html) vignette shows examples to handle the FORCIS data
+- the [Data conversion](https://docs.ropensci.org/forcis/articles/data-conversion.html) 
+vignette describes the conversion functions available in `forcis` to compute abundances, concentrations, and frequencies
+- the [Data visualization](https://docs.ropensci.org/forcis/articles/data-visualization.html)
+vignette describes the plotting functions available in `forcis`
 
 
 # Acknowledgements
 
 The FORCIS project is supported by the French Foundation for Biodiversity 
-Research (FRB) (https://www.fondationbiodiversite.fr) through its Centre for 
-the Synthesis and Analysis of Biodiversity (CESAB) 
-(https://www.fondationbiodiversite.fr/en/about-the-foundation/le-cesab/) and 
-co-funded by INSU LEFE program and the Max Planck Institute for Chemistry 
+Research ([FRB](https://www.fondationbiodiversite.fr)) through its Centre for 
+the Synthesis and Analysis of Biodiversity 
+([CESAB](https://www.fondationbiodiversite.fr/en/about-the-foundation/le-cesab/)) 
+and co-funded by INSU LEFE program and the Max Planck Institute for Chemistry 
 (MPIC) in Mainz. M.G. was supported by a Juan de la Cierva-formacion 2021 
 fellowship (FJC2021–047494-I/MCIN/AEI/10.13039/501100011033) from the European 
 Union “NextGenerationEU”/PRTR and by the Beatriu de Pinós  programme 
@@ -300,7 +292,8 @@ his work received support from the French government under the France 2030
 investment plan, as part of the Initiative d’Excellence d’Aix-Marseille 
 Université (A*MIDEX AMX-20-TRA-029). The authors would like to thank Beatriz 
 Milz, Scott Chamberlain and Air Forbes for theirs valuable comments during the 
-peer review process in [rOpenSci](https://ropensci.org).
+peer review process in 
+[rOpenSci](https://github.com/ropensci/software-review/issues/660).
 
 
 
